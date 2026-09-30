@@ -47,10 +47,14 @@ function findEmployeeShift(employee) {
 function getDepartmentShifts(department) {
     return shifts.filter(shift => shift.department === department);
 }
+function getShiftById(id) {
+    return shifts.find(shift => shift.id === id);
+}
 
 module.exports = {
     getShifts,
     addShift,
     findEmployeeShift,
-    getDepartmentShifts
+    getDepartmentShifts,
+    getShiftById
 };
