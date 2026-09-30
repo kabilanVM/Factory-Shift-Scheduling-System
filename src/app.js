@@ -54,11 +54,14 @@ function getDepartmentShifts(department) {
 function getShiftById(id) {
     return shifts.find(shift => shift.id === id);
 }
-
+function getShiftCount() {
+    return shifts.length;
+}
 module.exports = {
     getShifts,
     addShift,
     findEmployeeShift,
     getDepartmentShifts,
-    getShiftById
+    getShiftById,
+    getShiftCount
 };

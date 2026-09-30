@@ -1,7 +1,8 @@
 const {
     getShifts,
     addShift,
-    findEmployeeShift
+    findEmployeeShift,
+    getShiftCount
 } = require("../src/app");
 
 test("should return factory shifts", () => {
@@ -26,4 +27,7 @@ test("should find employee shift", () => {
 
     expect(shift).toBeDefined();
     expect(shift.employee).toBe("Kabilan");
+});
+test('returns total number of shifts', () => {
+    expect(getShiftCount()).toBeGreaterThan(0);
 });
