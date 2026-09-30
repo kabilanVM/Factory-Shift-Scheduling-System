@@ -27,6 +27,10 @@ function getShifts() {
 }
 
 function addShift(employee, department, shift, time) {
+    if (!employee || !department || !shift || !time) {
+        return null;
+    }
+
     const newShift = {
         id: shifts.length + 1,
         employee,
