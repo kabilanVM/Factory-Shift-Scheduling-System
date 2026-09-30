@@ -44,9 +44,13 @@ function findEmployeeShift(employee) {
         shift => shift.employee.toLowerCase() === employee.toLowerCase()
     );
 }
+function getDepartmentShifts(department) {
+    return shifts.filter(shift => shift.department === department);
+}
 
 module.exports = {
     getShifts,
     addShift,
-    findEmployeeShift
+    findEmployeeShift,
+    getDepartmentShifts
 };
