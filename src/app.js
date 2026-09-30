@@ -44,7 +44,9 @@ function addShift(employee, department, shift, time) {
 }
 
 function findEmployeeShift(employee) {
+ 
     return shifts.find(shift => shift.employee.toLowerCase() === employee.toLowerCase());
+
 }
 function getDepartmentShifts(department) {
     return shifts.filter(shift => shift.department === department);
