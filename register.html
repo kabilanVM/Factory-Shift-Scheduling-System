@@ -1,0 +1,575 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FactoryFlow | Create Account</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0b1535, #173b78, #2563eb);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 30px 18px;
+            color: #172554;
+        }
+
+        .page {
+            width: 100%;
+            max-width: 1050px;
+            min-height: 620px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            background: white;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 25px 80px #0004;
+            animation: appear 0.6s ease;
+        }
+
+        @keyframes appear {
+            from {
+                opacity: 0;
+                transform: translateY(18px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .brand-panel {
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(150deg, #102858, #1d4ed8);
+            color: white;
+            padding: 48px 42px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .brand-panel::before,
+        .brand-panel::after {
+            content: "";
+            position: absolute;
+            border: 1px solid #ffffff20;
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .brand-panel::before {
+            width: 340px;
+            height: 340px;
+            right: -150px;
+            top: 80px;
+        }
+
+        .brand-panel::after {
+            width: 240px;
+            height: 240px;
+            right: -100px;
+            top: 130px;
+        }
+
+        .brand, .brand-content, .brand-footer {
+            position: relative;
+            z-index: 1;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 23px;
+            font-weight: 800;
+            letter-spacing: -0.7px;
+        }
+
+        .brand-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            display: grid;
+            place-items: center;
+            background: #ffffff20;
+            border: 1px solid #ffffff35;
+            font-size: 22px;
+        }
+
+        .brand-content {
+            margin-top: 55px;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 9px 13px;
+            background: #ffffff15;
+            border: 1px solid #ffffff25;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 25px;
+        }
+
+        .brand-content h1 {
+            font-size: clamp(30px, 3.5vw, 43px);
+            line-height: 1.2;
+            letter-spacing: -1.7px;
+            margin-bottom: 20px;
+        }
+
+        .brand-content h1 span {
+            color: #93c5fd;
+        }
+
+        .brand-content > p {
+            color: #dbeafe;
+            font-size: 14px;
+            line-height: 1.9;
+            max-width: 350px;
+        }
+
+        .benefits {
+            margin-top: 32px;
+            display: grid;
+            gap: 18px;
+        }
+
+        .benefit {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            color: #eff6ff;
+            font-size: 13px;
+        }
+
+        .benefit i {
+            width: 34px;
+            height: 34px;
+            display: grid;
+            place-items: center;
+            background: #ffffff17;
+            border-radius: 10px;
+            color: #bfdbfe;
+        }
+
+        .brand-footer {
+            color: #bfdbfe;
+            font-size: 11px;
+            margin-top: 45px;
+        }
+
+        .form-panel {
+            padding: 50px 48px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .form-heading {
+            margin-bottom: 30px;
+        }
+
+        .form-heading .small-label {
+            color: #2563eb;
+            font-size: 11px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1.8px;
+            margin-bottom: 12px;
+        }
+
+        .form-heading h2 {
+            font-size: 30px;
+            letter-spacing: -1px;
+            color: #0f172a;
+            margin-bottom: 10px;
+        }
+
+        .form-heading p {
+            font-size: 13px;
+            color: #64748b;
+            line-height: 1.7;
+        }
+
+        .field {
+            margin-bottom: 19px;
+        }
+
+        .field label {
+            display: block;
+            font-size: 12px;
+            font-weight: 700;
+            color: #334155;
+            margin-bottom: 9px;
+        }
+
+        .input-wrap {
+            position: relative;
+        }
+
+        .input-wrap > i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #94a3b8;
+            font-size: 14px;
+        }
+
+        .input-wrap input {
+            width: 100%;
+            height: 48px;
+            padding: 0 44px;
+            border: 1px solid #dbe3ef;
+            border-radius: 10px;
+            outline: none;
+            background: #f8fafc;
+            font: inherit;
+            font-size: 13px;
+            color: #0f172a;
+            transition: 0.2s;
+        }
+
+        .input-wrap input:focus {
+            background: white;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 4px #3b82f618;
+        }
+
+        .input-wrap input::placeholder {
+            color: #a0aec0;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 13px;
+            top: 50%;
+            transform: translateY(-50%);
+            border: none;
+            background: transparent;
+            color: #64748b;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .hint {
+            margin-top: 7px;
+            color: #94a3b8;
+            font-size: 10px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            height: 49px;
+            border: none;
+            border-radius: 10px;
+            background: linear-gradient(100deg, #2563eb, #1d4ed8);
+            color: white;
+            font: inherit;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 6px;
+            box-shadow: 0 8px 18px #2563eb30;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 24px #2563eb40;
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.7;
+            cursor: wait;
+            transform: none;
+        }
+
+        #message {
+            margin-top: 14px;
+            font-size: 12px;
+            line-height: 1.6;
+            text-align: center;
+        }
+
+        .login-link {
+            margin-top: 25px;
+            text-align: center;
+            color: #64748b;
+            font-size: 12px;
+        }
+
+        .login-link a {
+            color: #2563eb;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+
+        .security-note {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 7px;
+            color: #94a3b8;
+            font-size: 10px;
+            margin-top: 30px;
+        }
+
+        @media (max-width: 760px) {
+            .page {
+                max-width: 460px;
+                grid-template-columns: 1fr;
+            }
+
+            .brand-panel {
+                padding: 28px;
+            }
+
+            .brand-content {
+                margin-top: 32px;
+            }
+
+            .brand-content h1 {
+                font-size: 30px;
+            }
+
+            .benefits {
+                margin-top: 22px;
+                gap: 12px;
+            }
+
+            .brand-footer {
+                margin-top: 28px;
+            }
+
+            .form-panel {
+                padding: 35px 28px;
+            }
+
+            .form-heading h2 {
+                font-size: 26px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main class="page">
+
+        <section class="brand-panel">
+            <div class="brand">
+                <div class="brand-icon">
+                    <i class="fa-solid fa-industry"></i>
+                </div>
+                <span>FactoryFlow</span>
+            </div>
+
+            <div class="brand-content">
+                <div class="eyebrow">
+                    <i class="fa-solid fa-calendar-check"></i>
+                    SMART SHIFT SCHEDULING
+                </div>
+
+                <h1>Build a smoother <span>shift schedule.</span></h1>
+
+                <p>
+                    Join your team on FactoryFlow and make it easier
+                    to stay connected with your factory's daily shifts.
+                </p>
+
+                <div class="benefits">
+                    <div class="benefit">
+                        <i class="fa-solid fa-clock"></i>
+                        <span>Clear shift and timing information</span>
+                    </div>
+
+                    <div class="benefit">
+                        <i class="fa-solid fa-people-group"></i>
+                        <span>Better team coordination</span>
+                    </div>
+
+                    <div class="benefit">
+                        <i class="fa-solid fa-shield-halved"></i>
+                        <span>Secure account-based access</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="brand-footer">
+                © 2026 FactoryFlow · Factory Shift Scheduling System
+            </div>
+        </section>
+
+        <section class="form-panel">
+            <div class="form-heading">
+                <div class="small-label">GET STARTED</div>
+                <h2>Create your account</h2>
+                <p>Enter your details to join your team's scheduling workspace.</p>
+            </div>
+
+            <form id="registerForm">
+                <div class="field">
+                    <label for="name">Full name</label>
+                    <div class="input-wrap">
+                        <i class="fa-regular fa-user"></i>
+                        <input
+                            type="text"
+                            id="name"
+                            name="name"
+                            placeholder="Enter your full name"
+                            maxlength="100"
+                            autocomplete="name"
+                            required>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label for="username">Username</label>
+                    <div class="input-wrap">
+                        <i class="fa-solid fa-at"></i>
+                        <input
+                            type="text"
+                            id="username"
+                            name="username"
+                            placeholder="Choose a username"
+                            maxlength="50"
+                            autocomplete="username"
+                            pattern="[A-Za-z0-9._-]+"
+                            title="Use letters, numbers, dots, underscores or hyphens."
+                            required>
+                    </div>
+                    <p class="hint">Letters, numbers, dots, underscores and hyphens.</p>
+                </div>
+
+                <div class="field">
+                    <label for="password">Password</label>
+                    <div class="input-wrap">
+                        <i class="fa-solid fa-lock"></i>
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            placeholder="Create a strong password"
+                            minlength="8"
+                            autocomplete="new-password"
+                            required>
+
+                        <button class="toggle-password" type="button"
+                                id="togglePassword" aria-label="Show password">
+                            <i class="fa-regular fa-eye"></i>
+                        </button>
+                    </div>
+                    <p class="hint">Use at least 8 characters.</p>
+                </div>
+
+                <button type="submit" class="submit-btn" id="submitBtn">
+                    Create account <i class="fa-solid fa-arrow-right"></i>
+                </button>
+
+                <p id="message" role="status" aria-live="polite"></p>
+            </form>
+
+            <div class="login-link">
+                Already have an account?
+                <a href="/login.html">Sign in</a>
+            </div>
+
+            <div class="security-note">
+                <i class="fa-solid fa-lock"></i>
+                Your account is protected with password hashing.
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        const form = document.getElementById("registerForm");
+        const message = document.getElementById("message");
+        const submitBtn = document.getElementById("submitBtn");
+        const passwordInput = document.getElementById("password");
+        const togglePassword = document.getElementById("togglePassword");
+
+        togglePassword.addEventListener("click", function () {
+            const isHidden = passwordInput.type === "password";
+
+            passwordInput.type = isHidden ? "text" : "password";
+            togglePassword.innerHTML = isHidden
+                ? '<i class="fa-regular fa-eye-slash"></i>'
+                : '<i class="fa-regular fa-eye"></i>';
+
+            togglePassword.setAttribute(
+                "aria-label",
+                isHidden ? "Hide password" : "Show password"
+            );
+        });
+
+        form.addEventListener("submit", async function (event) {
+            event.preventDefault();
+
+            message.textContent = "";
+            submitBtn.disabled = true;
+            submitBtn.innerHTML =
+                '<i class="fa-solid fa-spinner fa-spin"></i> Creating account...';
+
+            try {
+                const response = await fetch("/api/register", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        name: document.getElementById("name").value.trim(),
+                        username: document.getElementById("username").value.trim(),
+                        password: passwordInput.value
+                    })
+                });
+
+                const data = await response.json();
+
+                message.textContent = data.message ||
+                    (response.ok ? "Registration successful." : "Registration failed.");
+
+                message.style.color = response.ok ? "#059669" : "#dc2626";
+
+                if (response.ok) {
+                    form.reset();
+
+                    setTimeout(function () {
+                        window.location.href = "/login.html";
+                    }, 1200);
+                }
+            } catch (error) {
+                message.textContent =
+                    "Cannot connect to the server. Please try again.";
+                message.style.color = "#dc2626";
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML =
+                    'Create account <i class="fa-solid fa-arrow-right"></i>';
+            }
+        });
+    </script>
+</body>
+</html>

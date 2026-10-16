@@ -1,0 +1,14 @@
+[
+  {
+    "name": "Administrator",
+    "username": "admin",
+    "passwordHash": "$2b$10$QaqTvKIJXy/04g.zmFZneOImFgVuyEaajivsJR4NUl/p3Jo3xN0vK",
+    "role": "admin"
+  },
+  {
+    "name": "Kabilan",
+    "username": "kabilan",
+    "passwordHash": "$2b$10$UXbzAPdxhPGTH.TGG0dwae3iP43EWwj1psEDbsUUHK3V9ubng5vGm",
+    "role": "employee"
+  }
+]

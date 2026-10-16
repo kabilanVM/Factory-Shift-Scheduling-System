@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1792162927383,
+    "shiftId": 1,
+    "employee": "Kabilan",
+    "username": "kabilan",
+    "department": "Production",
+    "currentShift": "Morning",
+    "currentTime": "6:00 AM - 2:00 PM",
+    "requestedShift": "Morning",
+    "requestedTime": "400 to 600",
+    "reason": "nuinjjnjkmk,p,okok,",
+    "status": "Approved",
+    "adminResponse": "Request approved by admin",
+    "createdAt": "2026-10-16T15:02:07.383Z",
+    "reviewedAt": "2026-10-16T15:15:34.179Z"
+  }
+]

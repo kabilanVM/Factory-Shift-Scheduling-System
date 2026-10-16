@@ -1,0 +1,240 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Dashboard | FactoryFlow</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="employee.js" defer></script>
+</head>
+<body class="employee-dashboard">
+
+    <aside class="employee-sidebar">
+        <div class="employee-brand">
+            <div class="brand-icon">F</div>
+            <div>
+                <h2>FactoryFlow</h2>
+                <span>Workforce Portal</span>
+            </div>
+        </div>
+
+        <p class="sidebar-label">WORKSPACE</p>
+
+        <nav class="employee-nav">
+            <a href="#overview" class="active">
+                <span>▦</span> Overview
+            </a>
+            <a href="#mySchedule">
+                <span>▣</span> My Schedule
+            </a>
+            <a href="#requestSection">
+                <span>↗</span> Request Shift Change
+            </a>
+            <a href="#myRequestsSection">
+                <span>◷</span> My Requests
+            </a>
+        </nav>
+
+        <div class="sidebar-help">
+            <div class="help-icon">?</div>
+            <strong>Need assistance?</strong>
+            <p>Contact your shift administrator for scheduling support.</p>
+        </div>
+
+        <button id="logoutBtn" class="sidebar-logout">
+            ↪ &nbsp; Log Out
+        </button>
+    </aside>
+
+    <main class="employee-main" id="overview">
+
+        <header class="employee-topbar">
+            <div>
+                <p class="breadcrumb">Workspace / Overview</p>
+                <span class="topbar-caption">Employee Portal</span>
+            </div>
+
+            <div class="employee-profile">
+                <div class="profile-avatar" id="profileAvatar">E</div>
+                <div>
+                    <strong id="topEmployeeName">Employee</strong>
+                    <span>Team Member</span>
+                </div>
+            </div>
+        </header>
+
+        <section class="employee-welcome">
+            <div class="welcome-content">
+                <span class="welcome-tag">EMPLOYEE WORKSPACE</span>
+                <h1>Welcome back, <span id="employeeName">Employee</span>!</h1>
+                <p>Here's your schedule and shift activity. Have a productive day!</p>
+            </div>
+            <div class="welcome-decoration" aria-hidden="true">
+                <div class="welcome-circle">✦</div>
+                <div class="welcome-orbit"></div>
+            </div>
+        </section>
+
+        <section class="employee-stats">
+            <article class="employee-stat-card">
+                <div class="stat-icon blue-icon">▣</div>
+                <div>
+                    <p>Assigned Shifts</p>
+                    <h2 id="assignedShiftCount">0</h2>
+                    <span>Your scheduled shifts</span>
+                </div>
+            </article>
+
+            <article class="employee-stat-card">
+                <div class="stat-icon purple-icon">◷</div>
+                <div>
+                    <p>Daily Working Hours</p>
+                    <h2 id="workingHours">8 hrs</h2>
+                    <span>Based on your shift</span>
+                </div>
+            </article>
+
+            <article class="employee-stat-card">
+                <div class="stat-icon orange-icon">↗</div>
+                <div>
+                    <p>Pending Requests</p>
+                    <h2 id="pendingRequestCount">0</h2>
+                    <span>Waiting for admin review</span>
+                </div>
+            </article>
+        </section>
+
+        <section class="employee-content-grid">
+
+            <article class="employee-panel schedule-panel" id="mySchedule">
+                <div class="panel-heading">
+                    <div>
+                        <h2>My Assigned Shifts</h2>
+                        <p>Your current factory schedule</p>
+                    </div>
+                    <span class="live-badge">
+                        <span></span> Assigned
+                    </span>
+                </div>
+
+                <div id="myShifts" class="shift-list">
+                    <p class="empty-state">Loading your shifts...</p>
+                </div>
+            </article>
+
+            <article class="employee-panel quick-panel">
+                <div class="panel-heading">
+                    <div>
+                        <h2>Quick Actions</h2>
+                        <p>Manage your shift activities</p>
+                    </div>
+                </div>
+
+                <a href="#requestSection" class="quick-action">
+                    <span class="quick-action-icon">↗</span>
+                    <span>
+                        <strong>Request a Shift Change</strong>
+                        <small>Request a different shift or time</small>
+                    </span>
+                    <span class="quick-arrow">→</span>
+                </a>
+
+                <a href="#myRequestsSection" class="quick-action">
+                    <span class="quick-action-icon teal-icon">◷</span>
+                    <span>
+                        <strong>Track My Requests</strong>
+                        <small>Check your request status</small>
+                    </span>
+                    <span class="quick-arrow">→</span>
+                </a>
+
+                <div class="quick-note">
+                    <span>ⓘ</span>
+                    <p>Shift changes take effect only after administrator approval.</p>
+                </div>
+            </article>
+
+        </section>
+
+        <section class="employee-panel request-panel" id="requestSection">
+            <div class="panel-heading">
+                <div>
+                    <h2>Request a Shift Change</h2>
+                    <p>Tell your administrator what schedule works better for you.</p>
+                </div>
+                <span class="request-heading-icon">↗</span>
+            </div>
+
+            <form id="requestForm" class="modern-request-form">
+
+                <div class="form-field">
+                    <label for="shiftId">Current Assigned Shift</label>
+                    <select id="shiftId" required>
+                        <option value="">Select your shift</option>
+                    </select>
+                </div>
+
+                <div class="form-field">
+                    <label for="requestedShift">Requested Shift</label>
+                    <select id="requestedShift" required>
+                        <option value="">Choose a shift</option>
+                        <option value="Morning">Morning Shift</option>
+                        <option value="Evening">Evening Shift</option>
+                        <option value="Night">Night Shift</option>
+                    </select>
+                </div>
+
+                <div class="form-field form-field-full">
+                    <label for="requestedTime">Requested Working Hours</label>
+                    <input
+                        id="requestedTime"
+                        type="text"
+                        placeholder="e.g. 8:00 AM - 4:00 PM"
+                        required
+                    >
+                </div>
+
+                <div class="form-field form-field-full">
+                    <label for="reason">Reason for Change</label>
+                    <textarea
+                        id="reason"
+                        rows="4"
+                        placeholder="Please explain why you need this shift change..."
+                        required
+                    ></textarea>
+                </div>
+
+                <div class="form-field-full request-form-footer">
+                    <p>Your request will be reviewed by the administrator.</p>
+                    <button type="submit" class="employee-submit-btn">
+                        Submit Request <span>→</span>
+                    </button>
+                </div>
+
+                <p id="requestMessage" class="request-message form-field-full"
+                   role="status"></p>
+            </form>
+        </section>
+
+        <section class="employee-panel history-panel" id="myRequestsSection">
+            <div class="panel-heading">
+                <div>
+                    <h2>My Recent Requests</h2>
+                    <p>Follow the status of your shift-change requests.</p>
+                </div>
+            </div>
+
+            <div id="myRequests" class="request-history">
+                <p class="empty-state">Loading your requests...</p>
+            </div>
+        </section>
+
+        <footer class="employee-footer">
+            <span>© FactoryFlow · Factory Shift Scheduling System</span>
+            <span>Employee Workspace</span>
+        </footer>
+
+    </main>
+</body>
+</html>

@@ -1,0 +1,734 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FSS | Factory Shift Scheduling</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app-layout">
+
+    <aside class="sidebar">
+        <div class="brand">
+            <div class="brand-icon">F</div>
+            <div>
+                <h2>Factory<span>Flow</span></h2>
+                <p>SHIFT MANAGEMENT</p>
+            </div>
+        </div>
+
+        <div class="nav-label">WORKSPACE</div>
+
+        <nav class="navigation">
+            <a href="#dashboard" class="nav-link active">
+                <span class="nav-icon">▦</span> Dashboard
+            </a>
+            <a href="#schedule" class="nav-link">
+                <span class="nav-icon">▤</span> Shift Schedule
+            </a>
+            <a href="#add-shift" class="nav-link">
+                <span class="nav-icon">＋</span> Add New Shift
+            </a>
+            <a href="#employee-search" class="nav-link">
+                <span class="nav-icon">⌕</span> Employee Search
+            </a>
+            <a href="#shift-requests" class="nav-link">
+                  <span class="nav-icon">📋</span> Shift Requests
+            </a>
+        </nav>
+
+        <div class="sidebar-bottom">
+            <div class="status-indicator"></div>
+            <div>
+                <strong>System Status</strong>
+                <p>Ready for operation</p>
+            </div>
+        </div>
+    </aside>
+
+    <main class="main-content">
+
+        <header class="topbar">
+            <div>
+                <p class="breadcrumb">Workspace / Overview</p>
+                <h1>Factory Dashboard</h1>
+            </div>
+
+            <div class="topbar-right">
+                <div class="live-status">
+                    <span class="live-dot"></span> Live Dashboard
+                </div>
+                <div class="profile">
+                    <div class="avatar">FM</div>
+                    <div>
+                        <strong>Factory Manager</strong>
+                        <p>Administrator</p>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <section class="welcome-banner" id="dashboard">
+            <div class="welcome-content">
+                <span class="eyebrow">SHIFT OPERATIONS CENTER</span>
+                <h2>Every shift. Every employee.<br>One organized workspace.</h2>
+                <p>
+                    Monitor workforce schedules, assign shifts, and keep
+                    your factory operations running smoothly.
+                </p>
+                <a href="#add-shift" class="primary-link">＋ Create New Shift</a>
+            </div>
+            <div class="banner-art" aria-hidden="true">
+                <div class="orbit orbit-one"></div>
+                <div class="orbit orbit-two"></div>
+                <div class="factory-symbol">⚙</div>
+                <div class="floating-card">
+                    <span class="live-dot"></span> Operations active
+                </div>
+            </div>
+        </section>
+
+        <section class="section-heading">
+            <div>
+                <h2>Workforce Overview</h2>
+                <p>A quick snapshot of your scheduled workforce</p>
+            </div>
+            <span class="date-label" id="currentDate">Today's Overview</span>
+        </section>
+
+        <section class="stats-grid">
+            <article class="stat-card stat-blue">
+                <div class="stat-top">
+                    <span>Total Scheduled Shifts</span>
+                    <span class="stat-icon">▤</span>
+                </div>
+                <h3 id="totalShifts">--</h3>
+                <p>All recorded shifts</p>
+            </article>
+
+            <article class="stat-card stat-purple">
+                <div class="stat-top">
+                    <span>Morning Shift</span>
+                    <span class="stat-icon">☀</span>
+                </div>
+                <h3 id="morningCount">--</h3>
+                <p>Employees assigned</p>
+            </article>
+
+            <article class="stat-card stat-orange">
+                <div class="stat-top">
+                    <span>Evening Shift</span>
+                    <span class="stat-icon">◷</span>
+                </div>
+                <h3 id="eveningCount">--</h3>
+                <p>Employees assigned</p>
+            </article>
+
+            <article class="stat-card stat-green">
+                <div class="stat-top">
+                    <span>Night Shift</span>
+                    <span class="stat-icon">☾</span>
+                </div>
+                <h3 id="nightCount">--</h3>
+                <p>Employees assigned</p>
+            </article>
+        </section>
+
+        <section class="content-grid">
+
+            <article class="panel add-panel" id="add-shift">
+                <div class="panel-heading">
+                    <div>
+                        <span class="panel-kicker">WORKFORCE PLANNING</span>
+                        <h2>Create a Shift</h2>
+                        <p>Enter the employee's shift details below.</p>
+                    </div>
+                    <div class="heading-icon">＋</div>
+                </div>
+
+                <form id="shiftForm">
+                    <div class="form-group">
+                        <label for="employee">Employee Name</label>
+                        <input id="employee" name="employee"
+                               placeholder="Enter full name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="department">Department</label>
+                        <select id="department" name="department" required>
+                            <option value="">Select department</option>
+                            <option>Production</option>
+                            <option>Quality</option>
+                            <option>Maintenance</option>
+                            <option>Packaging</option>
+                            <option>Warehouse</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="shift">Shift Type</label>
+                        <select id="shift" name="shift" required>
+                            <option value="">Select shift</option>
+                            <option>Morning</option>
+                            <option>Evening</option>
+                            <option>Night</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="time">Shift Timing</label>
+                        <input id="time" name="time"
+                               placeholder="e.g. 6:00 AM - 2:00 PM" required>
+                    </div>
+
+                    <div class="form-note">
+                        <span>ⓘ</span>
+                        Make sure the employee and shift details are correct.
+                    </div>
+
+                    <button type="submit" class="submit-button">
+                        <span>＋</span> Add Employee Shift
+                    </button>
+
+                    <p id="message" class="form-message" role="status"></p>
+                </form>
+            </article>
+
+            <article class="panel search-panel" id="employee-search">
+                <div class="panel-heading">
+                    <div>
+                        <span class="panel-kicker">QUICK LOOKUP</span>
+                        <h2>Find an Employee</h2>
+                        <p>Search for an employee's assigned shift.</p>
+                    </div>
+                    <div class="heading-icon search-icon">⌕</div>
+                </div>
+
+                <form id="searchForm" class="search-form">
+                    <label for="searchEmployee">Employee Name</label>
+                    <div class="search-input-wrap">
+                        <span>⌕</span>
+                        <input id="searchEmployee"
+                               placeholder="Search by employee name" required>
+                    </div>
+                    <button type="submit" class="search-button">Find Shift →</button>
+                </form>
+
+                <div id="searchResult" class="search-result" aria-live="polite">
+                    <div class="empty-search-icon">⌕</div>
+                    <h3>Employee details will appear here</h3>
+                    <p>Enter an employee name above to view their assignment.</p>
+                </div>
+
+                <div class="department-note">
+                    <span class="note-icon">✦</span>
+                    <div>
+                        <strong>Quick tip</strong>
+                        <p>Search is case-insensitive. You can enter names in any letter case.</p>
+                    </div>
+                </div>
+            </article>
+
+        </section>
+
+        <section class="panel schedule-panel" id="schedule">
+            <div class="panel-heading schedule-heading">
+                <div>
+                    <span class="panel-kicker">SCHEDULING MANAGEMENT</span>
+                    <h2>Employee Shift Schedule</h2>
+                    <p>Review all recorded employee shift assignments.</p>
+                </div>
+                <button type="button" class="refresh-button" id="refreshButton">
+                    ↻ Refresh Data
+                </button>
+            </div>
+
+            <div class="table-toolbar">
+                <div class="table-search">
+                    <span>⌕</span>
+                    <input type="search" id="tableSearch"
+                           placeholder="Filter employees...">
+                </div>
+
+                <select id="departmentFilter" aria-label="Filter by department">
+                    <option value="">All Departments</option>
+                    <option>Production</option>
+                    <option>Quality</option>
+                    <option>Maintenance</option>
+                    <option>Packaging</option>
+                    <option>Warehouse</option>
+                </select>
+            </div>
+
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>SHIFT ID</th>
+                            <th>EMPLOYEE</th>
+                            <th>DEPARTMENT</th>
+                            <th>SHIFT TYPE</th>
+                            <th>SCHEDULED TIME</th>
+                            <th>STATUS</th>
+                        </tr>
+                    </thead>
+                    <tbody id="shiftTable">
+                        <tr>
+                            <td colspan="6" class="loading-cell">
+                                Loading shift schedule...
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="table-footer">
+                <p id="tableSummary">Loading employee records...</p>
+                <span class="footer-indicator">
+                    <span class="live-dot"></span> Schedule overview
+                </span>
+            </div>
+        </section>
+        
+<section class="panel schedule-panel requests-panel" id="shift-requests">
+    <div class="panel-heading schedule-heading">
+        <div>
+            <span class="panel-kicker">EMPLOYEE MANAGEMENT</span>
+            <h2>Employee Shift Requests</h2>
+            <p>Review and approve or reject employee shift-change requests.</p>
+        </div>
+        <button type="button" class="refresh-button" id="refreshRequestsButton">
+            ↻ Refresh Requests
+        </button>
+    </div>
+
+    <p id="requestMessage" style="padding: 0 25px 15px;"></p>
+
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>EMPLOYEE</th>
+                    <th>DEPARTMENT</th>
+                    <th>CURRENT SHIFT</th>
+                    <th>REQUESTED SHIFT</th>
+                    <th>REQUESTED TIME</th>
+                    <th>REASON</th>
+                    <th>STATUS</th>
+                    <th>ACTION</th>
+                </tr>
+            </thead>
+            <tbody id="requestsTable">
+                <tr>
+                    <td colspan="8" class="loading-cell">
+                        Click Refresh Requests to load requests.
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+
+        <footer class="page-footer">
+            <p>© 2026 FactoryFlow · Factory Shift Scheduling System</p>
+            <p>Workforce management made organized.</p>
+        </footer>
+
+    </main>
+</div>
+
+<script>
+    const shiftTable = document.getElementById("shiftTable");
+    const shiftForm = document.getElementById("shiftForm");
+    const searchForm = document.getElementById("searchForm");
+
+    let allShifts = [];
+
+    document.getElementById("currentDate").textContent =
+        new Date().toLocaleDateString("en-IN", {
+            day: "numeric",
+            month: "short",
+            year: "numeric"
+        });
+
+    function makeCell(value, className = "") {
+        const cell = document.createElement("td");
+        cell.textContent = value ?? "";
+        if (className) cell.className = className;
+        return cell;
+    }
+
+    function updateStatistics(shifts) {
+        document.getElementById("totalShifts").textContent = shifts.length;
+        document.getElementById("morningCount").textContent =
+            shifts.filter(s => s.shift.toLowerCase() === "morning").length;
+        document.getElementById("eveningCount").textContent =
+            shifts.filter(s => s.shift.toLowerCase() === "evening").length;
+        document.getElementById("nightCount").textContent =
+            shifts.filter(s => s.shift.toLowerCase() === "night").length;
+    }
+
+    function renderTable() {
+        const query = document.getElementById("tableSearch").value.toLowerCase();
+        const department = document.getElementById("departmentFilter").value;
+
+        const filtered = allShifts.filter(s =>
+            s.employee.toLowerCase().includes(query) &&
+            (!department || s.department === department)
+        );
+
+        shiftTable.replaceChildren();
+
+        if (filtered.length === 0) {
+            const row = document.createElement("tr");
+            const cell = makeCell("No matching shift records found.");
+            cell.colSpan = 6;
+            cell.className = "loading-cell";
+            row.appendChild(cell);
+            shiftTable.appendChild(row);
+        } else {
+            filtered.forEach(s => {
+                const row = document.createElement("tr");
+                row.append(
+                    makeCell("#" + s.id, "id-cell"),
+                    makeCell(s.employee, "employee-cell"),
+                    makeCell(s.department),
+                    makeCell(s.shift, "shift-cell " + s.shift.toLowerCase()),
+                    makeCell(s.time)
+                );
+
+                const statusCell = document.createElement("td");
+                const status = document.createElement("span");
+                status.className = "status-badge";
+                status.textContent = "Assigned";
+                statusCell.appendChild(status);
+                row.appendChild(statusCell);
+
+                shiftTable.appendChild(row);
+            });
+        }
+
+        document.getElementById("tableSummary").textContent =
+            `Showing ${filtered.length} of ${allShifts.length} shift records`;
+    }
+
+    async function loadShifts() {
+        shiftTable.replaceChildren();
+        const loadingRow = document.createElement("tr");
+        const loadingCell = makeCell("Loading shift schedule...");
+        loadingCell.colSpan = 6;
+        loadingCell.className = "loading-cell";
+        loadingRow.appendChild(loadingCell);
+        shiftTable.appendChild(loadingRow);
+
+        try {
+            const response = await fetch("/api/shifts");
+            if (!response.ok) throw new Error("Unable to load shifts");
+
+            allShifts = await response.json();
+            updateStatistics(allShifts);
+            renderTable();
+        } catch (error) {
+            shiftTable.replaceChildren();
+            const row = document.createElement("tr");
+            const cell = makeCell(
+                "Could not connect to the server. Please start the application and refresh."
+            );
+            cell.colSpan = 6;
+            cell.className = "loading-cell error-text";
+            row.appendChild(cell);
+            shiftTable.appendChild(row);
+
+            document.getElementById("tableSummary").textContent =
+                "Unable to load records";
+        }
+    }
+
+    shiftForm.addEventListener("submit", async event => {
+        event.preventDefault();
+
+        const message = document.getElementById("message");
+        message.className = "form-message";
+        message.textContent = "Adding shift...";
+
+        const data = {
+            employee: document.getElementById("employee").value.trim(),
+            department: document.getElementById("department").value,
+            shift: document.getElementById("shift").value,
+            time: document.getElementById("time").value.trim()
+        };
+
+        try {
+            const response = await fetch("/api/shifts", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(data)
+            });
+
+            const result = await response.json();
+
+            if (!response.ok) {
+                throw new Error(result.message || "Could not add shift");
+            }
+
+            message.textContent = result.message || "Shift added successfully!";
+            message.classList.add("success-message");
+            shiftForm.reset();
+            await loadShifts();
+        } catch (error) {
+            message.textContent = error.message || "Server connection failed.";
+            message.classList.add("error-text");
+        }
+    });
+
+    searchForm.addEventListener("submit", async event => {
+        event.preventDefault();
+
+        const name = document.getElementById("searchEmployee").value.trim();
+        const resultBox = document.getElementById("searchResult");
+
+        resultBox.replaceChildren();
+
+        try {
+            const response = await fetch(
+                "/api/shifts/employee/" + encodeURIComponent(name)
+            );
+            const result = await response.json();
+
+            if (!response.ok) {
+                throw new Error(result.message || "Employee not found");
+            }
+
+            const heading = document.createElement("h3");
+            heading.textContent = result.employee;
+
+            const department = document.createElement("p");
+            department.textContent = "Department: " + result.department;
+
+            const shift = document.createElement("p");
+            shift.textContent = "Shift: " + result.shift;
+
+            const time = document.createElement("p");
+            time.textContent = "Time: " + result.time;
+
+            const badge = document.createElement("span");
+            badge.className = "status-badge";
+            badge.textContent = "Shift Found";
+
+            resultBox.append(heading, department, shift, time, badge);
+            resultBox.classList.add("found-result");
+        } catch (error) {
+            const heading = document.createElement("h3");
+            heading.textContent = "Employee not found";
+
+            const detail = document.createElement("p");
+            detail.textContent = error.message;
+
+            resultBox.append(heading, detail);
+            resultBox.classList.remove("found-result");
+        }
+    });
+
+    document.getElementById("tableSearch").addEventListener("input", renderTable);
+    document.getElementById("departmentFilter").addEventListener("change", renderTable);
+    document.getElementById("refreshButton").addEventListener("click", loadShifts);
+
+    document.querySelectorAll(".nav-link").forEach(link => {
+        link.addEventListener("click", () => {
+            document.querySelectorAll(".nav-link").forEach(item =>
+                item.classList.remove("active")
+            );
+            link.classList.add("active");
+        });
+    });
+
+    loadShifts();
+</script>
+
+<script>
+async function checkLoginStatus() {
+    const response = await fetch("/api/login/status");
+
+    if (!response.ok) {
+        window.location.href = "/login.html";
+        return;
+    }
+
+    const data = await response.json();
+
+    if (!data.loggedIn) {
+        window.location.href = "/login.html";
+        return;
+    }
+
+    document.body.dataset.role = data.user.role;
+
+    // Hide the add-shift form for employees.
+    if (data.user.role !== "admin") {
+        document.querySelectorAll(
+            "#addShiftForm, .admin-only, [data-admin-only]"
+        ).forEach(element => {
+            element.hidden = true;
+        });
+    }
+
+    const status = document.getElementById("loginStatus");
+
+    if (status) {
+        status.textContent =
+            `Logged in as ${data.user.username} (${data.user.role})`;
+    }
+}
+
+checkLoginStatus();
+</script>
+
+<script>
+const requestsTable = document.getElementById("requestsTable");
+const requestMessage = document.getElementById("requestMessage");
+const refreshRequestsButton =
+    document.getElementById("refreshRequestsButton");
+
+async function loadShiftRequests() {
+    requestsTable.replaceChildren();
+    requestMessage.textContent = "Loading requests...";
+
+    try {
+        const response = await fetch("/api/shift-requests");
+        const requests = await response.json();
+
+        if (!response.ok) {
+            throw new Error(requests.message || "Could not load requests.");
+        }
+
+        requestMessage.textContent = "";
+
+        if (!Array.isArray(requests) || requests.length === 0) {
+            const row = document.createElement("tr");
+            const cell = document.createElement("td");
+            cell.colSpan = 8;
+            cell.className = "loading-cell";
+            cell.textContent = "No shift requests have been submitted yet.";
+            row.appendChild(cell);
+            requestsTable.appendChild(row);
+            return;
+        }
+
+        requests.forEach(request => {
+            const row = document.createElement("tr");
+
+            function addCell(value) {
+                const cell = document.createElement("td");
+                cell.textContent = value || "-";
+                row.appendChild(cell);
+            }
+
+            addCell(request.employee);
+            addCell(request.department);
+            addCell(
+                [request.currentShift, request.currentTime]
+                    .filter(Boolean).join(" — ")
+            );
+            addCell(request.requestedShift);
+            addCell(request.requestedTime);
+            addCell(request.reason);
+
+            const statusCell = document.createElement("td");
+            const status = document.createElement("span");
+            status.className = "request-status " +
+                String(request.status || "Pending").toLowerCase();
+            status.textContent = request.status || "Pending";
+            statusCell.appendChild(status);
+            row.appendChild(statusCell);
+
+            const actionCell = document.createElement("td");
+
+            if ((request.status || "Pending").toLowerCase() === "pending") {
+                ["Approved", "Rejected"].forEach(action => {
+                    const button = document.createElement("button");
+                    button.type = "button";
+                    button.textContent =
+                        action === "Approved" ? "Approve" : "Reject";
+                    button.className = "request-action " +
+                        (action === "Approved"
+                            ? "approve-action"
+                            : "reject-action");
+
+                    button.addEventListener("click", () => {
+                        reviewShiftRequest(request.id, action);
+                    });
+
+                    actionCell.appendChild(button);
+                });
+            } else {
+                actionCell.textContent = "Reviewed";
+            }
+
+            row.appendChild(actionCell);
+            requestsTable.appendChild(row);
+        });
+    } catch (error) {
+        requestMessage.textContent = error.message;
+        requestsTable.replaceChildren();
+
+        const row = document.createElement("tr");
+        const cell = document.createElement("td");
+        cell.colSpan = 8;
+        cell.className = "loading-cell error-text";
+        cell.textContent = "Could not load requests. Check your login and server.";
+        row.appendChild(cell);
+        requestsTable.appendChild(row);
+    }
+}
+
+async function reviewShiftRequest(id, status) {
+    if (!confirm("Are you sure you want to " + status.toLowerCase() +
+        " this shift request?")) {
+        return;
+    }
+
+    try {
+        const response = await fetch(
+            "/api/shift-requests/" + encodeURIComponent(id),
+            {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    status: status,
+                    adminResponse: status === "Approved"
+                        ? "Request approved by admin"
+                        : "Request rejected by admin"
+                })
+            }
+        );
+
+        const result = await response.json();
+
+        if (!response.ok) {
+            throw new Error(result.message || "Could not update request.");
+        }
+
+        requestMessage.textContent = "Request " + status.toLowerCase() +
+            " successfully.";
+        await loadShiftRequests();
+
+        // Refresh the schedule too, if its existing function is available.
+        if (typeof loadShifts === "function") {
+            await loadShifts();
+        }
+    } catch (error) {
+        requestMessage.textContent = error.message;
+    }
+}
+
+refreshRequestsButton.addEventListener("click", loadShiftRequests);
+loadShiftRequests();
+</script>
+</body>
+</html>
